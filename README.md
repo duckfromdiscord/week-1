@@ -1,4 +1,3 @@
-
 # Super Epic Bozo Sorter (SEBS)
 
 Super Epic Bozo Sorter (SEBS) is an immensely powerful, multithreaded, efficient number sorter! It takes inputs in the form of a (unsure) and returns data in the form of a BSV File (Bullshit Separated Values, pattent pending) 
