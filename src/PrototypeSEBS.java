@@ -1,15 +1,16 @@
 import java.util.Scanner;
-@test
+
 public class PrototypeSEBS {
 	public void prototype(DatabaseSeverInterface server) {
 		//Sign user in
 		Scanner sc = new Scanner(System.in);
 		String username = sc.next();
 		LoginAttempt login = server.login(new LoginRequest(username));
-		if(login.isSuccessful())
+		if(login.isSuccessful()) {
 			System.out.println("Success");
-		else
+		} else {
 			System.out.println("Fail");
+		}
 		
 		//Accept file from user, import it into database
 		boolean storeUserDataSuccess = server.storeUserData();
