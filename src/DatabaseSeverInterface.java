@@ -1,3 +1,6 @@
+import project.annotations.ProcessAPI;
+
+@ProcessAPI
 public interface DatabaseSeverInterface {
 	
 	boolean storeUserData();
