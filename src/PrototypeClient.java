@@ -1,4 +1,8 @@
+import project.annotations.NetworkAPIPrototype;
+
 public class PrototypeClient{
+	
+	@NetworkAPIPrototype
 	public void prototype(ClientInterface client) {
 		
 		int userId = 0;
