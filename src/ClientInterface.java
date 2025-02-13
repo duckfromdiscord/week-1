@@ -1,3 +1,6 @@
+import project.annotations.NetworkAPI;
+
+@NetworkAPI
 public interface ClientInterface {
 
 	boolean transmitUsername(int userId);
