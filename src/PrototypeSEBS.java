@@ -1,5 +1,5 @@
 import java.util.Scanner;
-
+@test
 public class PrototypeSEBS {
 	public void prototype(DatabaseSeverInterface server) {
 		//Sign user in
@@ -20,7 +20,7 @@ public class PrototypeSEBS {
 		boolean processDataSuccess = server.processData(chosenDataID);
 		System.out.println(processDataSuccess);
 		
-		//Recieve data from computation server, put it into database
+		//Receive data from computation server, put it into database
 		int serverDataID = sc.nextInt();
 		boolean storeSortedDataSuccess = server.storeSortedData(serverDataID);
 		System.out.println(storeSortedDataSuccess);
