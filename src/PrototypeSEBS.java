@@ -1,6 +1,10 @@
 import java.util.Scanner;
 
+import project.annotations.ProcessAPIPrototype;
+
 public class PrototypeSEBS {
+
+	@ProcessAPIPrototype
 	public void prototype(DatabaseSeverInterface server) {
 		//Sign user in
 		Scanner sc = new Scanner(System.in);
