@@ -5,7 +5,7 @@ public interface DatabaseSeverInterface {
 	
 	boolean storeUserData();
 	
-	LoginAttempt login(LoginRequest loginRequest);
+	LoginAttemptInterface login(LoginRequest loginRequest);
 
 	boolean processData(int chosenDataID);
 
