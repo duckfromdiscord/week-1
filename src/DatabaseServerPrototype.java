@@ -2,14 +2,14 @@ import java.util.Scanner;
 
 import project.annotations.ProcessAPIPrototype;
 
-public class PrototypeSEBS {
+public class DatabaseServerPrototype {
 
 	@ProcessAPIPrototype
 	public void prototype(DatabaseSeverInterface server) {
 		//Sign user in
 		Scanner sc = new Scanner(System.in);
 		String username = sc.next();
-		LoginAttempt login = server.login(new LoginRequest(username));
+		LoginAttemptInterface login = server.login(new LoginRequest(username));
 		if(login.isSuccessful()) {
 			System.out.println("Success");
 		} else {
