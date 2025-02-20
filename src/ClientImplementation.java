@@ -8,7 +8,7 @@ public class ClientImplementation implements ClientInterface {
 	}
 	
 	@Override
-	public boolean transmitQuery(int Query) {
+	public boolean transmitQuery(int query) {
 		// empty for now
 		return false;
 	}
