@@ -25,7 +25,7 @@ public class ComputeEngineIntegrationTest {
 		BozoSorter bozoSorter = new BozoSorter();
 		bozoSorter.setRandomSeed(1);
 		
-		int index = inputData.getFirst();
+		int index = inputData.get(0);
 		inputData.remove(0);
 		WrappedArrayList<Integer> wrappedData = new WrappedArrayList<Integer>();
 		wrappedData.setItems(inputData);
