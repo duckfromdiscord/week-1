@@ -10,8 +10,8 @@ public class ConceptualAPITest {
 	public void smokeTest() {
 		
 		// Create our sorter
-		// TODO: add a random seed option
 		BozoSorter bozoSorter = new BozoSorter();
+		bozoSorter.setRandomSeed(1);
 		
 		// Make a list (out of order) of two items
 		WrappedArrayList<Integer> list = new WrappedArrayList<Integer>();

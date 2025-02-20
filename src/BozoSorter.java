@@ -1,8 +1,10 @@
+import java.util.Random;
 
 public class BozoSorter implements Sorter<Integer> {
 
 	private WrappedArrayList<Integer> data;
 	private DatabaseSeverInterface database;
+	private Random random;
 	
 	@Override
 	public boolean step() {
@@ -30,6 +32,12 @@ public class BozoSorter implements Sorter<Integer> {
 
 	@Override
 	public boolean sortUntilFinished() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean setRandomSeed(long seed) {
 		// TODO Auto-generated method stub
 		return false;
 	}
