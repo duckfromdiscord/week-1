@@ -8,6 +8,8 @@ public interface Sorter<T extends Comparable<T>> {
 	
 	boolean checkSorted();
 	
+	boolean setRandomSeed(long seed);
+	
 	boolean setData(WrappedArrayList<T> data, int index);
 	
 	WrappedArrayList<T> getData();
