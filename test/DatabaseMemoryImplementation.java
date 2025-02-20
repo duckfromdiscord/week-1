@@ -34,10 +34,14 @@ public class DatabaseMemoryImplementation implements DatabaseSeverInterface {
 	public boolean storeSortedData(int dataID) {
 		Scanner sc = new Scanner(System.in); 
 		while (sc.hasNextLine()) {
-             String line = sc.nextLine();
-             String[] fields = line.split(",");
-             userData.add(fields);
-         }
+		    String line = sc.nextLine();
+		    String[] tokens = line.split(",");
+		    for (String token : tokens) {
+		        // Parse the token as an int and add it to userData
+		        userData.add(Integer.parseInt(token.trim()));
+		    }
+		}
+		sc.close();
 		return false;
 	}
 
