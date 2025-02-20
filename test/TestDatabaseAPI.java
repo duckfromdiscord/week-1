@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class testDatabaseAPI {
+public class TestDatabaseAPI {
 	@Test 
 	public void testAPIs() {
 		DatabaseServer server = new DatabaseServer();
