@@ -4,9 +4,13 @@ public class LoginAttempt implements LoginAttemptInterface {
 
 	
 	private String userID = null;
+	private boolean isLoggedIn = false;
+	private String message = null;
 	
 	public LoginAttempt(LoginRequest request) {
 		this.userID = request.getUserID();
+		this.isLoggedIn = this.isSuccessful();
+		this.message = this.getMessage();
 	}
 
 	@Override
@@ -20,14 +24,16 @@ public class LoginAttempt implements LoginAttemptInterface {
 
 	@Override
 	public String getUserID() {
-		// TODO Auto-generated method stub
-		return "user";
+		return this.userID;
 	}
 
 	@Override
 	public String getMessage() {
-		// TODO Auto-generated method stub
-		return null;
+		return "Welcome back, " + userID;
 	}
-
+	
+	@Override
+	public boolean getLoginStatus() {
+		return isLoggedIn;
+	}
 }

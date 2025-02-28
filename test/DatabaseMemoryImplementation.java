@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
-public class DatabaseMemoryImplementation implements DatabaseSeverInterface {
+public class DatabaseMemoryImplementation implements DatabaseServerInterface {
 
 	private ArrayList<Integer> userData = new ArrayList<Integer>(); 
 	private int user = 0;

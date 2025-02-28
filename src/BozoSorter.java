@@ -3,7 +3,7 @@ import java.util.Random;
 public class BozoSorter implements Sorter<Integer> {
 
 	private WrappedArrayList<Integer> data;
-	private DatabaseSeverInterface database;
+	private DatabaseServerInterface database;
 	private Random random;
 	
 	private boolean swapItems(int item1, int item2) {
