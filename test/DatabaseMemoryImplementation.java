@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
-public class DatabaseMemoryImplementation implements DatabaseSeverInterface {
+public class DatabaseMemoryImplementation implements DatabaseServerInterface {
 
 	private ArrayList<Integer> userData = new ArrayList<Integer>(); 
 	private int user = 0;
@@ -12,17 +12,6 @@ public class DatabaseMemoryImplementation implements DatabaseSeverInterface {
 		this.user = random.nextInt();
 	}
 
-	@Override
-	public boolean storeUserData() {
-		Scanner sc = new Scanner(System.in);
-		userData.add(sc.nextInt());
-		return false;
-	}
-
-	@Override
-	public LoginAttemptInterface login(LoginRequest loginRequest) {
-		return null;
-	}
 
 	@Override
 	public boolean processData(int chosenDataID) {
@@ -48,6 +37,26 @@ public class DatabaseMemoryImplementation implements DatabaseSeverInterface {
 	@Override
 	public boolean returnUserData(int chosenDataID, int chosenDataType) {
 		System.out.println(userData.get(chosenDataID));
+		return false;
+	}
+
+
+	@Override
+	public LoginAttemptInterface loginMethod(LoginRequest loginRequest) {
+		return null;
+	}
+
+
+	@Override
+	public boolean wipeUserData() {
+		return false;
+	}
+
+
+	@Override
+	public boolean storeUserData(String fileName) {
+		Scanner sc = new Scanner(System.in);
+		userData.add(sc.nextInt());
 		return false;
 	}
 
