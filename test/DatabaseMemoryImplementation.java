@@ -13,18 +13,6 @@ public class DatabaseMemoryImplementation implements DatabaseServerInterface {
 	}
 
 	@Override
-	public boolean storeUserData() {
-		Scanner sc = new Scanner(System.in);
-		userData.add(sc.nextInt());
-		return false;
-	}
-
-	@Override
-	public LoginAttemptInterface login(LoginRequest loginRequest) {
-		return null;
-	}
-
-	@Override
 	public boolean processData(int chosenDataID) {
 		// Code that sends the user data to the computation side of the project 
 		return false;
@@ -48,6 +36,24 @@ public class DatabaseMemoryImplementation implements DatabaseServerInterface {
 	@Override
 	public boolean returnUserData(int chosenDataID, int chosenDataType) {
 		System.out.println(userData.get(chosenDataID));
+		return false;
+	}
+
+	@Override
+	public LoginAttemptInterface loginMethod(LoginRequest loginRequest) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean wipeUserData() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean storeUserData(String fileName) {
+		// TODO Auto-generated method stub
 		return false;
 	}
 
