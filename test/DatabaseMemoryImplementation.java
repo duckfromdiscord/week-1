@@ -12,6 +12,7 @@ public class DatabaseMemoryImplementation implements DatabaseServerInterface {
 		this.user = random.nextInt();
 	}
 
+
 	@Override
 	public boolean processData(int chosenDataID) {
 		// Code that sends the user data to the computation side of the project 
@@ -39,21 +40,23 @@ public class DatabaseMemoryImplementation implements DatabaseServerInterface {
 		return false;
 	}
 
+
 	@Override
 	public LoginAttemptInterface loginMethod(LoginRequest loginRequest) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
+
 	@Override
 	public boolean wipeUserData() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
+
 	@Override
 	public boolean storeUserData(String fileName) {
-		// TODO Auto-generated method stub
+		Scanner sc = new Scanner(System.in);
+		userData.add(sc.nextInt());
 		return false;
 	}
 
