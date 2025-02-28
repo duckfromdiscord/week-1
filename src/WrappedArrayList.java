@@ -46,6 +46,10 @@ public class WrappedArrayList<T extends Comparable<T>> {
 		return arrayList.add(item);
 	}
 	
+	public int size() {
+		return arrayList.size();
+	}
+	
 	public ArrayList<T> getItems() {
 		initializeIfNeeded();
 		return arrayList;
