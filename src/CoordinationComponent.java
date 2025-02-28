@@ -23,26 +23,26 @@ public class CoordinationComponent {
 			//write results
 			return writeToStorage(outputLocation, results);
 		} catch (Exception e) {
-			System.err.println("Error occured" + e.getMessage());
+			System.err.println("Error occured:" + e.getMessage());
 			return false;
 		}
 	}
-
+	
 	private boolean writeToStorage(String outputLocation, int[] results) {
 		for(int i = 0; i<results.length ; i++) {
-		System.out.println(results[i]);
+			System.out.println(results[i]);
 		}
-		return false;
+		return true;
 	}
-
-	private int[] processdata(Iterable<Integer> inputData) {
+	
+	//would return int[]
+	private void processdata(Iterable<Integer> inputData) {
 		System.out.println(inputData);
-		return null;
 	}
-
-	private Iterable<Integer> readFromStorage(String inputLocation) {
+	
+	//would return Iterable<Integer>
+	private void readFromStorage(String inputLocation) {
 		System.out.println(inputLocation);
-		return null;
 	}
 	
 }
