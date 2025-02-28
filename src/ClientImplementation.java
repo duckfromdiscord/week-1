@@ -1,5 +1,9 @@
-
 public class ClientImplementation implements ClientInterface {
+	private final CoordinationComponent coordinator;
+	
+	public ClientImplementation() {
+		this.coordinator = new CoordinationComponent();
+	}
 	
 	@Override
 	public boolean transmitUsername(int userId) {
@@ -19,4 +23,8 @@ public class ClientImplementation implements ClientInterface {
 		return false;
 	}
 
+	@Override
+	public boolean requestCompuation(String inputLocation, String outputLocation) {
+		return coordinator.executeComputation(inputLocation, outputLocation);
+	}
 }
