@@ -35,14 +35,15 @@ public class CoordinationComponent {
 		return true;
 	}
 	
-	//would return int[]
-	private void processdata(Iterable<Integer> inputData) {
+
+	private int[] processdata(Iterable<Integer> inputData) {
 		System.out.println(inputData);
+		return null;
 	}
 	
-	//would return Iterable<Integer>
-	private void readFromStorage(String inputLocation) {
+	private Iterable<Integer> readFromStorage(String inputLocation) {
 		System.out.println(inputLocation);
+		return null;
 	}
 	
 }
