@@ -22,7 +22,9 @@ public class DatabaseServer implements DatabaseServerInterface {
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine().trim();
                 // Skip empty lines
-                if (line.isEmpty()) {continue;}
+                if (line.isEmpty()) {
+                	continue;
+                	}
                 
                 String[] tokens = line.split(",");
                 double[] numbers = new double[tokens.length];
