@@ -1,17 +1,19 @@
 import project.annotations.ProcessAPI;
 
 @ProcessAPI
-public interface DatabaseSeverInterface {
+public interface DatabaseServerInterface {
 	
-	boolean storeUserData();
-	
-	LoginAttemptInterface login(LoginRequest loginRequest);
+	LoginAttemptInterface loginMethod(LoginRequest loginRequest);
 
 	boolean processData(int chosenDataID);
 
 	boolean storeSortedData(int dataID);
 
 	boolean returnUserData(int chosenDataID, int chosenDataType);
+	
+	boolean wipeUserData();
+
+	boolean storeUserData(String fileName);
 
 	
 
