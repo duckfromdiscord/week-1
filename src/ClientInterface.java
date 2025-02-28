@@ -9,4 +9,6 @@ public interface ClientInterface {
 
 	boolean getFile(int file);
 	
+	boolean requestCompuation(String inputLocation, String outputLocation);
+	
 }
