@@ -28,7 +28,7 @@ public class BozoSorter implements Sorter<Integer> {
 		} catch(Throwable t) {
 			// if there's somehow an error here,
 			// sanitize it and display
-			System.out.println(t.getMessage());
+			System.out.println("Step failed: " + t.getMessage());
 			return false;
 		}
 	}
@@ -69,14 +69,19 @@ public class BozoSorter implements Sorter<Integer> {
 
 	@Override
 	public boolean sortUntilFinished() {
-		while (!this.checkSorted()) {
-			boolean success = this.step();
-			if (!success) {
-				// problem with sorting
-				return false;
+		try {
+			while (!this.checkSorted()) {
+				boolean success = this.step();
+				if (!success) {
+					// problem with sorting
+					return false;
+				}
 			}
+			return this.checkSorted();
+		} catch(Throwable t) {
+			System.out.println("Sort failed: " + t.getMessage());
+			return false;
 		}
-		return this.checkSorted();
 	}
 
 	@Override
