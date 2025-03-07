@@ -8,7 +8,7 @@ public class BozoSorter implements Sorter<Integer> {
 	
 	private boolean swapItems(int item1, int item2) {
 		// validate both indices are within the list
-		if (item1 < data.size()-1 || item2 < data.size()-1) {
+		if (item1 > data.size()-1 || item2 > data.size()-1) {
 			return false;
 		}
 		int data1 = data.getItemAtIndex(item1);
