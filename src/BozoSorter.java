@@ -7,6 +7,10 @@ public class BozoSorter implements Sorter<Integer> {
 	private Random random;
 	
 	private boolean swapItems(int item1, int item2) {
+		// validate both indices are within the list
+		if (item1 > data.size()-1 || item2 > data.size()-1) {
+			return false;
+		}
 		int data1 = data.getItemAtIndex(item1);
 		int data2 = data.getItemAtIndex(item2);
 		data.set(item1, data2);
@@ -18,7 +22,15 @@ public class BozoSorter implements Sorter<Integer> {
 	public boolean step() {
 		int item1 = random.nextInt(0, data.size());
 		int item2 = random.nextInt(0, data.size());
-		return this.swapItems(item1, item2);
+		// any errors in indices will propagate
+		try {
+			return this.swapItems(item1, item2);
+		} catch(Throwable t) {
+			// if there's somehow an error here,
+			// sanitize it and display
+			System.out.println("Step failed: " + t.getMessage());
+			return false;
+		}
 	}
 
 	@Override
@@ -43,6 +55,9 @@ public class BozoSorter implements Sorter<Integer> {
 
 	@Override
 	public boolean setData(WrappedArrayList<Integer> data, int index) {
+		if (data == null) {
+			return false;
+		}
 		this.data = data;
 		return true;
 	}
@@ -54,14 +69,24 @@ public class BozoSorter implements Sorter<Integer> {
 
 	@Override
 	public boolean sortUntilFinished() {
-		while (!this.checkSorted()) {
-			this.step();
+		try {
+			while (!this.checkSorted()) {
+				boolean success = this.step();
+				if (!success) {
+					// problem with sorting
+					return false;
+				}
+			}
+			return this.checkSorted();
+		} catch(Throwable t) {
+			System.out.println("Sort failed: " + t.getMessage());
+			return false;
 		}
-		return this.checkSorted();
 	}
 
 	@Override
 	public boolean setRandomSeed(long seed) {
+		// longs cannot be null so we don't need validation here
 		this.random = new Random();
 		this.random.setSeed(seed);
 		return true;
