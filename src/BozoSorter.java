@@ -23,7 +23,14 @@ public class BozoSorter implements Sorter<Integer> {
 		int item1 = random.nextInt(0, data.size());
 		int item2 = random.nextInt(0, data.size());
 		// any errors in indices will propagate
-		return this.swapItems(item1, item2);
+		try {
+			return this.swapItems(item1, item2);
+		} catch(Throwable t) {
+			// if there's somehow an error here,
+			// sanitize it and display
+			System.out.println(t.getMessage());
+			return false;
+		}
 	}
 
 	@Override
