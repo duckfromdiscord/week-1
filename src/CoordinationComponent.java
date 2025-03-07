@@ -68,7 +68,7 @@ public class CoordinationComponent {
 			}
 			return true;
 		} catch (Exception e) {
-			System.err.println("Erro writing to storage: " + e.getMessage());
+			System.err.println("Error writing to storage: " + e.getMessage());
 			return false;
 		}
 		
