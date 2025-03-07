@@ -26,17 +26,17 @@ public class DatabaseServer implements DatabaseServerInterface {
                 	continue;
                 	}
                 
-                String[] tokens = line.split(",");
-                double[] numbers = new double[tokens.length];
-                
+                String[] element = line.split(",");
+                double[] numbers = new double[element.length];
                 // Parse each token as a double
-                for (int i = 0; i < tokens.length; i++) {
+                for (int i = 0; i < element.length; i++) {
                     try {
-                        numbers[i] = Double.parseDouble(tokens[i].trim());
+                        numbers[i] = Double.parseDouble(element[i].trim());
                     } catch (NumberFormatException e) {
-                        System.err.println("Invalid number format for token: " + tokens[i] + " in line: " + line);
-                        // You might choose to handle this error differently.
-                        numbers[i] = 0.0; // Default value in case of error
+                        System.out.println("Invalid number format for element: " + element[i] + " in line: " + line);
+                        //Making this more readable for others by naming it element instead of token. 
+                        //I also dont know how it turned into System.err.println. maybe a misclick when autofilling.
+                        numbers[i] = 0.0; 
                     }
                 }
                 
@@ -45,7 +45,7 @@ public class DatabaseServer implements DatabaseServerInterface {
                 }
             }
             scanner.close();
-        } catch (FileNotFoundException e) {
+        } catch (FileNotFoundException e) { //This exception is thrown by scanner if file not found. Just have to catch and fix it.
             System.err.println("CSV file not found: " + csvFilePath);
             e.printStackTrace();
         }
@@ -80,6 +80,10 @@ public class DatabaseServer implements DatabaseServerInterface {
 	public boolean wipeUserData() {
 		userData.removeAll(userData);
 		return true;
+	}
+	
+	public String getUserID() {
+		return login.getUserID();
 	}
 
 }
