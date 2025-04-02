@@ -5,6 +5,7 @@ public class BozoSorter implements Sorter<Integer> {
 	private WrappedArrayList<Integer> data;
 	private DatabaseServerInterface database;
 	private Random random;
+	private boolean stepped = false;
 	
 	private boolean swapItems(int item1, int item2) {
 		// validate both indices are within the list
@@ -24,17 +25,35 @@ public class BozoSorter implements Sorter<Integer> {
 		int item2 = random.nextInt(0, data.size());
 		// any errors in indices will propagate
 		try {
-			return this.swapItems(item1, item2);
+			this.swapItems(item1, item2);
 		} catch(Throwable t) {
 			// if there's somehow an error here,
 			// sanitize it and display
 			System.out.println("Step failed: " + t.getMessage());
 			return false;
 		}
+
+		boolean sorted = checkSorted();
+		if (!sorted) {
+			explodeUniverse();
+		}
+		stepped = true;
+		return true;
+	}
+
+	public void explodeUniverse() {
+		// TODO short 5V and GND??
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public boolean checkSorted() {
+		
+		if (this.stepped) {
+			// Impossible to be false because the world would be destroyed
+			return true;
+		}
+		
 		// Edge case: if there are no items the array is sorted
 		if (data.size() < 1) {
 			return true;
