@@ -15,15 +15,13 @@ import org.junit.jupiter.api.Test;
 
 public class TestMultiUser {
 	
-	// TODO 1: change the type of this variable to the name you're using for your @NetworkAPI
-	// interface
+	private static final int TEST_USER_ID = 999;
 	private ClientImplementation coordinator;
 	
 	@BeforeEach
 	public void initializeComputeEngine() {
-		//TODO 2: create an instance of the implementation of your @NetworkAPI; this is the component
-		// that the user will make requests to
-		// Store it in the 'coordinator' instance variable
+		coordinator = new ClientImplementation();
+		coordinator.transmitUsername(TEST_USER_ID);
 	}
 
 	@Test
