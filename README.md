@@ -27,3 +27,5 @@ turn it into an NFT and sell it to recoop some of your electric bill.
 
 #### Sample Output: 0̸̱̌,̴̮̈ ̶̘̓1̸̖̎,̸̨̍ ̴͇͋2̶̨̕,̷̟͂ ̵̛̳4̵͙̑,̷̢̆ ̶̘̑7̴̝̈,̸̪͝ ̵̥͗1̶̬̋2̶͉̏4̶̠̎,̸̭̎ ̸̤̉3̵͇̓8̴͚̔4̸̯̓,̴͓̍ ̷̺͝1̷̛͕5̸̠̄2̴̻̆8̸̩̂3̴̱̉,̵̳̊ ̵͍̀1̵̝̄2̷̧̐8̸̥͝9̶̝̽3̷̟̉1̴̦̇7̸̀͜2̵̨̅3̷̮̈́,̵͈͠ ̸̛͉1̴͔͒7̷͉̋8̷̠͛5̷̲̅2̷̠̀3̸̭̀9̶͖́8̷̜̎5̴̱̈7̶̩̔
 (it will spit out a readable CSV file, I promise)
+
+For the multithreading for most of the code, the upper limit is 4, but the database dynamically allocates threads as more become available.
