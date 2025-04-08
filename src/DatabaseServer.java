@@ -16,40 +16,33 @@ public class DatabaseServer implements DatabaseServerInterface {
 
 	@Override
 	public boolean storeUserData(String fileName) {
-		String csvFilePath = fileName; // Update this path to your CSV file location
-        try {
-            Scanner scanner = new Scanner(new File(csvFilePath));
-            while (scanner.hasNextLine()) {
-                String line = scanner.nextLine().trim();
-                // Skip empty lines
-                if (line.isEmpty()) {
-                	continue;
-                	}
-                
-                String[] element = line.split(",");
-                double[] numbers = new double[element.length];
-                // Parse each token as a double
-                for (int i = 0; i < element.length; i++) {
+		try (Stream<String> lines = Files.lines(Paths.get(fileName))) {
+            // Process each line concurrently using a parallel stream.
+            lines.parallel().forEach(line -> {
+                String trimmedLine = line.trim();
+                if (trimmedLine.isEmpty()) {
+                    return; // Skip empty lines
+                }
+                String[] elements = trimmedLine.split(",");
+                // For each element in the line, parse as double and store.
+                for (String element : elements) {
                     try {
-                        numbers[i] = Double.parseDouble(element[i].trim());
+                        double number = Double.parseDouble(element.trim());
+                        // Simulate storing the number in a database.
+                        fictitiousDatabase.add(number);
                     } catch (NumberFormatException e) {
-                        System.out.println("Invalid number format for element: " + element[i] + " in line: " + line);
-                        //Making this more readable for others by naming it element instead of token. 
-                        //I also dont know how it turned into System.err.println. maybe a misclick when autofilling.
-                        numbers[i] = 0.0; 
+                        System.out.println("Invalid number format for element: " + element +
+                                           " in line: " + line);
                     }
                 }
-                
-                for(int i = 0; i < numbers.length; i++) {
-                	userData.add(numbers[i]);
-                }
-            }
-            scanner.close();
-        } catch (FileNotFoundException e) { //This exception is thrown by scanner if file not found. Just have to catch and fix it.
-            System.err.println("CSV file not found: " + csvFilePath);
+            });
+        } catch (IOException e) {
+            System.err.println("Error reading file: " + fileName);
             e.printStackTrace();
+            return false;
         }
-		return true;
+        // At this point, data has been processed and "stored".
+        return true;
 	}
 
 	@Override
