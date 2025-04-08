@@ -1,17 +1,16 @@
 import java.util.List;
 
 public class CoordinationComponent {
-	/*
-	 * // error for now 
-	 * private final DatabaseServerInterface databaseServer; 
-	 * // get interface later 
-	 * private final Sorter computeEngine;
-	 * 
-	 * //Dependency Injection for easy testing public
-	 * CoordinationComponent(DatabaseServerInterface databaseServer, Sorter
-	 * computeEngine) { this.computeEngine = computeEngine; this.databaseServer =
-	 * databaseServer; }
-	 */
+
+	 private final DatabaseServerInterface databaseServer; 
+	 // get interface later 
+	 private final Sorter computeEngine;
+	 
+	 //Dependency Injection for easy testing public
+	 public CoordinationComponent(DatabaseServerInterface databaseServer, Sorter computeEngine) { 
+		 this.computeEngine = computeEngine; 
+		 this.databaseServer = databaseServer; 
+	}
 	
 	public boolean executeComputation(String inputLocation, String outputLocation) {
 		if(inputLocation == null || inputLocation.trim().isEmpty()) {
@@ -56,38 +55,43 @@ public class CoordinationComponent {
 		}
 	}
 	
-	protected boolean writeToStorage(String outputLocation, int[] results) {
-		if(results == null) {
-			System.err.println("Error: cannot write null to storage");
-			return false;
-		}
-		
-		try {
-			for(int i = 0; i < results.length; i++) {
-				System.out.println(results[i]);
-			}
-			return true;
-		} catch (Exception e) {
-			System.err.println("Error writing to storage: " + e.getMessage());
-			return false;
-		}
-		
+	protected int[] processdata(Iterable<Integer> inputData) throws InterruptedException, ExecutionException {
+	    List<Integer> inputList = new ArrayList<>();
+	    inputData.forEach(inputList::add);
+	    
+	    int threadCount = 4;
+	    ExecutorService executor = Executors.newFixedThreadPool(threadCount);
+	    List<Future<int[]>> futures = new ArrayList<>();
+	    
+	    int chunkSize = (int) Math.ceil(inputList.size() / (double) threadCount);
+	    for (int i = 0; i < inputList.size(); i += chunkSize) {
+	        List<Integer> chunk = inputList.subList(i, Math.min(i + chunkSize, inputList.size()));
+	        futures.add(executor.submit(() -> {
+	            // Placeholder for actual computation logic, e.g.:
+	            return computeEngine.sort(chunk);
+	        }));
+	    }
+
+	    List<Integer> result = new ArrayList<>();
+	    for (Future<int[]> future : futures) {
+	        int[] partial = future.get();
+	        for (int num : partial) result.add(num);
+	    }
+
+	    executor.shutdown();
+
+	    // Convert List<Integer> back to array
+	    return result.stream().mapToInt(i -> i).toArray();
 	}
+
 	
 
 	protected int[] processdata(Iterable<Integer> inputData) {
-		if(inputData == null) {
-			throw new IllegalArgumentException("Input data cannot be null");
-		}
+		List<Integer> inputList = new ArrayList<>();
+		inputData.forEach(inputList::add);
 		
-		try {
-			System.err.println(inputData);
-			//would be actual data but is dummy for now
-			return new int[] {1,2,3};
-		} catch (Exception e) {
-			System.err.println("Error processing data: " + e.getMessage());
-			throw new RuntimeException("Failed to process data", e);
-		}
+		int threadCount = 4;
+		ExecutorService executor = 
 	}
 	
 	protected Iterable<Integer> readFromStorage(String inputLocation) {
