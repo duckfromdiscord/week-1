@@ -5,7 +5,7 @@ import java.util.List;
 
 public class CoordinationComponentIntegrationTest {
     
-    // Mock implementations for basic functionality
+    //Mock implements
     private static class MockDatabaseServer implements CoordinationComponent.DatabaseServerInterface {
         @Override
         public Iterable<Integer> readData(String location) {
@@ -27,7 +27,7 @@ public class CoordinationComponentIntegrationTest {
     
     @Test
     public void testExceptionHandling_ReadFromStorage() throws Exception {
-        // Create a component with a throwing database server
+        //Create a component to the example database server
         CoordinationComponent.DatabaseServerInterface throwingDb = new CoordinationComponent.DatabaseServerInterface() {
             @Override
             public Iterable<Integer> readData(String location) {
@@ -42,14 +42,14 @@ public class CoordinationComponentIntegrationTest {
         
         CoordinationComponent component = new CoordinationComponent(throwingDb, new MockSorter());
         
-        // Execute and verify it returns false instead of propagating the exception
+        //Verifies it returns false
         boolean result = component.executeComputation("validInput", "validOutput");
         assertFalse(result, "Should return false when readFromStorage throws an exception");
     }
     
     @Test
     public void testExceptionHandling_ProcessData() throws Exception {
-        // Create a component with a throwing sorter
+        //Create a component to example sorter
         CoordinationComponent.Sorter throwingSorter = new CoordinationComponent.Sorter() {
             @Override
             public int[] sort(Iterable<Integer> data) {
@@ -59,14 +59,14 @@ public class CoordinationComponentIntegrationTest {
         
         CoordinationComponent component = new CoordinationComponent(new MockDatabaseServer(), throwingSorter);
         
-        // Execute and verify it returns false instead of propagating the exception
+        //Verifies it returns false
         boolean result = component.executeComputation("validInput", "validOutput");
         assertFalse(result, "Should return false when processData throws an exception");
     }
     
     @Test
     public void testExceptionHandling_WriteToStorage() throws Exception {
-        // Create a component with a database server that throws during write
+        //Create a component with a database server that throws during write
         CoordinationComponent.DatabaseServerInterface throwingWriteDb = new CoordinationComponent.DatabaseServerInterface() {
             @Override
             public Iterable<Integer> readData(String location) {
@@ -81,14 +81,14 @@ public class CoordinationComponentIntegrationTest {
         
         CoordinationComponent component = new CoordinationComponent(throwingWriteDb, new MockSorter());
         
-        // Execute and verify it returns false instead of propagating the exception
+        //Verifies it returns false
         boolean result = component.executeComputation("validInput", "validOutput");
         assertFalse(result, "Should return false when writeToStorage throws an exception");
     }
     
     @Test
     public void testMultiThreaded_ConcurrentExecution() throws Exception {
-        // Create a component with mock dependencies
+        //component mock dependencies
         CoordinationComponent component = new CoordinationComponent(new MockDatabaseServer(), new MockSorter());
         
         // Test concurrent execution of multiple computations
@@ -99,7 +99,7 @@ public class CoordinationComponentIntegrationTest {
         assertTrue(result, "Concurrent execution should succeed with valid parameters");
     }
     
-    // Helper assertion method
+    //assert method
     private void assertTrue(boolean condition, String message) {
         if (!condition) {
             throw new AssertionError(message);

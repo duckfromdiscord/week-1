@@ -5,7 +5,7 @@ import java.util.List;
 
 public class CoordinationComponentTest {
     
-    // Mock implementations of the dependencies
+    //Mock dependencies
     private static class MockDatabaseServer implements CoordinationComponent.DatabaseServerInterface {
         @Override
         public Iterable<Integer> readData(String location) {
@@ -25,7 +25,7 @@ public class CoordinationComponentTest {
         }
     }
     
-    // Helper method to create a component with mock dependencies
+    //creates component with mock dependencies
     private CoordinationComponent createComponent() {
         return new CoordinationComponent(new MockDatabaseServer(), new MockSorter());
     }

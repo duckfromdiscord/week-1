@@ -3,14 +3,13 @@ import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 public class CoordinationComponent {
-    // Thread synchronization mechanism
+    // Thread synchronized
     private final ReadWriteLock lock = new ReentrantReadWriteLock();
     
-    // Uncommented dependencies
+    // Uncommented dependencies, previously abstracted
     private final DatabaseServerInterface databaseServer;
     private final Sorter computeEngine;
-    
-    // Dependency Injection for easy testing
+   
     public CoordinationComponent(DatabaseServerInterface databaseServer, Sorter computeEngine) {
         this.computeEngine = computeEngine;
         this.databaseServer = databaseServer;
@@ -31,7 +30,7 @@ public class CoordinationComponent {
             // Read database data
             Iterable<Integer> inputData = readFromStorage(inputLocation);
             
-            // Validate input data
+            // Validate data
             if (inputData == null) {
                 logError("Error: Failed to read data from " + inputLocation);
                 return false;
@@ -48,6 +47,7 @@ public class CoordinationComponent {
             // Write results
             return writeToStorage(outputLocation, results);
         } catch (RuntimeException e) {
+        	
             // Runtime Exceptions
             logError("Runtime Error occurred: " + e.getMessage());
             e.printStackTrace(); // For debugging
@@ -60,10 +60,8 @@ public class CoordinationComponent {
     }
     
     /**
-     * Executes multiple computations concurrently
-     * @param inputLocations List of input locations
-     * @param outputLocations List of output locations
-     * @return true if all computations succeeded, false otherwise
+     * Multi-thread implemented.
+     * computes concurrently
      */
     
     public boolean executeBatchComputation(List<String> inputLocations, List<String> outputLocations) {
@@ -77,7 +75,7 @@ public class CoordinationComponent {
             return false;
         }
         
-        // Process all computations
+        // Process computations
         boolean allSucceeded = true;
         for (int i = 0; i < inputLocations.size(); i++) {
             allSucceeded &= executeComputation(inputLocations.get(i), outputLocations.get(i));
@@ -94,7 +92,7 @@ public class CoordinationComponent {
             }
             
             try {
-                // Use the database server to write data
+                // database writes data
                 return databaseServer.writeData(outputLocation, results);
             } catch (Exception e) {
                 logError("Error writing to storage: " + e.getMessage());
@@ -111,7 +109,7 @@ public class CoordinationComponent {
         }
         
         try {
-            // Use the compute engine to process data
+            // engine process data
             return computeEngine.sort(inputData);
         } catch (Exception e) {
             logError("Error processing data: " + e.getMessage());
@@ -127,7 +125,7 @@ public class CoordinationComponent {
             }
             
             try {
-                // Use the database server to read data
+                // database server read data
                 return databaseServer.readData(inputLocation);
             } catch (Exception e) {
                 logError("Error reading from storage: " + e.getMessage());
@@ -138,25 +136,30 @@ public class CoordinationComponent {
         }
     }
     
-     //Thread-safe error logging
+     //Thread protections
+    
+     //error logging
     private synchronized void logError(String message) {
         System.err.println(message);
     }
     
-     //Thread-safe info logging
+     //info logging
     private synchronized void logInfo(String message) {
         System.out.println(message);
     }
     
 
-     //Interface for database server operations
+     /*abstracted example database interfaces for now
+      *will connect components later
+      */
+     
     public interface DatabaseServerInterface {
         Iterable<Integer> readData(String location) throws Exception;
         boolean writeData(String location, int[] data) throws Exception;
     }
     
-    /**
-     * Interface for computation engine
+    /*abstracted example sorter interface for now
+     * will connect components later
      */
     public interface Sorter {
         int[] sort(Iterable<Integer> data) throws Exception;
