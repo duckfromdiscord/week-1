@@ -83,30 +83,5 @@ public class CoordinationComponent {
 	    // Convert List<Integer> back to array
 	    return result.stream().mapToInt(i -> i).toArray();
 	}
-
-	
-
-	protected int[] processdata(Iterable<Integer> inputData) {
-		List<Integer> inputList = new ArrayList<>();
-		inputData.forEach(inputList::add);
-		
-		int threadCount = 4;
-		ExecutorService executor = 
-	}
-	
-	protected Iterable<Integer> readFromStorage(String inputLocation) {
-		if(inputLocation == null) {
-			throw new IllegalArgumentException("Input Loaction cannot be null");
-		}
-		
-		try {
-			System.out.println(inputLocation);
-			//would be actual data but is dummy for now
-			return List.of(1, 2, 3);
-		} catch (Exception e) {
-			System.err.println("Error reading from storage: " + e.getMessage());
-			throw new RuntimeException("Failed to read from storage", e);
-		}
-	}
 	
 }
