@@ -65,8 +65,7 @@ public class CoordinationComponent {
     }
     
     /**
-     * Multi-thread implemented.
-     * computes concurrently
+     * Multi-thread implementation
      */
     
     public boolean executeBatchComputation(List<String>userIds, List<String> inputLocations, List<String> outputLocations) {
