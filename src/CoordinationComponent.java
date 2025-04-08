@@ -15,12 +15,16 @@ public class CoordinationComponent {
         this.databaseServer = databaseServer;
     }
     
+    CoordinationComponentThreading
     public boolean executeComputation(String userId, String inputLocation, String outputLocation) {
     	if (userId == null || userId.trim().isEmpty()) {
             logError("Error: userId cannot be null or empty");
             return false;
         }
     	
+
+    public boolean executeComputation(String inputLocation, String outputLocation) {
+        main
         if (inputLocation == null || inputLocation.trim().isEmpty()) {
             logError("Error: inputLocation cannot be null or empty");
             return false;
@@ -50,7 +54,11 @@ public class CoordinationComponent {
             }
             
             // Write results
+        CoordinationComponentThreading
             return writeToStorage(outputLocation, results, userId);
+          
+            return writeToStorage(outputLocation, results);
+        main
         } catch (RuntimeException e) {
         	
             // Runtime Exceptions
@@ -69,14 +77,23 @@ public class CoordinationComponent {
      * computes concurrently
      */
     
+    CoordinationComponentThreading
     public boolean executeBatchComputation(List<String>userIds, List<String> inputLocations, List<String> outputLocations) {
         
     	if (userIds == null || inputLocations == null || outputLocations == null) {
+        
+    public boolean executeBatchComputation(List<String> inputLocations, List<String> outputLocations) {
+        if (inputLocations == null || outputLocations == null) {
+      main
             logError("Input and output location lists cannot be null");
             return false;
         }
         
+     CoordinationComponentThreading
         if (inputLocations.size() != outputLocations.size() || userIds.size() != inputLocations.size()) {
+
+        if (inputLocations.size() != outputLocations.size()) {
+      main
             logError("Input and output location lists must be the same size");
             return false;
         }
@@ -84,16 +101,28 @@ public class CoordinationComponent {
         // Process computations
         boolean allSucceeded = true;
         for (int i = 0; i < inputLocations.size(); i++) {
+      CoordinationComponentThreading
             allSucceeded &= executeComputation(userIds.get(i), inputLocations.get(i), outputLocations.get(i));
+
+            allSucceeded &= executeComputation(inputLocations.get(i), outputLocations.get(i));
+      main
         }
         return allSucceeded;
     }
     
+    CoordinationComponentThreading
     protected boolean writeToStorage(String outputLocation, int[] results, String userId) {
         lock.writeLock().lock();
         try {
             if (results == null) {
                 logError("[" + userId + "]Error: cannot write null to storage");
+              
+    protected boolean writeToStorage(String outputLocation, int[] results) {
+        lock.writeLock().lock();
+        try {
+            if (results == null) {
+                logError("Error: cannot write null to storage");
+      main
                 return false;
             }
             
@@ -101,7 +130,11 @@ public class CoordinationComponent {
                 // database writes data
                 return databaseServer.writeData(outputLocation, results);
             } catch (Exception e) {
+    CoordinationComponentThreading
                 logError("[" + userId + "]Error writing to storage: " + e.getMessage());
+
+                logError("Error writing to storage: " + e.getMessage());
+     main
                 return false;
             }
         } finally {
