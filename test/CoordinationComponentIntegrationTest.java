@@ -43,7 +43,7 @@ public class CoordinationComponentIntegrationTest {
         CoordinationComponent component = new CoordinationComponent(throwingDb, new MockSorter());
         
         //Verifies it returns false
-        boolean result = component.executeComputation("validInput", "validOutput");
+        boolean result = component.executeComputation("user123","validInput", "validOutput");
         assertFalse(result, "Should return false when readFromStorage throws an exception");
     }
     
@@ -60,7 +60,7 @@ public class CoordinationComponentIntegrationTest {
         CoordinationComponent component = new CoordinationComponent(new MockDatabaseServer(), throwingSorter);
         
         //Verifies it returns false
-        boolean result = component.executeComputation("validInput", "validOutput");
+        boolean result = component.executeComputation("user123","validInput", "validOutput");
         assertFalse(result, "Should return false when processData throws an exception");
     }
     
@@ -82,7 +82,7 @@ public class CoordinationComponentIntegrationTest {
         CoordinationComponent component = new CoordinationComponent(throwingWriteDb, new MockSorter());
         
         //Verifies it returns false
-        boolean result = component.executeComputation("validInput", "validOutput");
+        boolean result = component.executeComputation("user123","validInput", "validOutput");
         assertFalse(result, "Should return false when writeToStorage throws an exception");
     }
     
@@ -92,10 +92,11 @@ public class CoordinationComponentIntegrationTest {
         CoordinationComponent component = new CoordinationComponent(new MockDatabaseServer(), new MockSorter());
         
         // Test concurrent execution of multiple computations
+        List<String> users = Arrays.asList("user1", "user2", "user3", "user4");
         List<String> inputs = Arrays.asList("input1", "input2", "input3", "input4");
         List<String> outputs = Arrays.asList("output1", "output2", "output3", "output4");
         
-        boolean result = component.executeBatchComputation(inputs, outputs);
+        boolean result = component.executeBatchComputation(users, inputs, outputs);
         assertTrue(result, "Concurrent execution should succeed with valid parameters");
     }
     
