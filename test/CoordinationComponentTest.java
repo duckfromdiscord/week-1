@@ -33,35 +33,35 @@ public class CoordinationComponentTest {
     @Test
     public void testExecuteComputation_ValidParameters() {
         CoordinationComponent component = createComponent();
-        boolean result = component.executeComputation("validInput", "validOutput");
+        boolean result = component.executeComputation("user123", "validInput", "validOutput");
         assertTrue(result, "Computation should succeed with valid parameters");
     }
     
     @Test
     public void testExecuteComputation_NullInputLocation() {
         CoordinationComponent component = createComponent();
-        boolean result = component.executeComputation(null, "validOutput");
+        boolean result = component.executeComputation("user123", null, "validOutput");
         assertFalse(result, "Computation should fail with null inputLocation");
     }
     
     @Test
     public void testExecuteComputation_EmptyInputLocation() {
         CoordinationComponent component = createComponent();
-        boolean result = component.executeComputation("", "validOutput");
+        boolean result = component.executeComputation("user123","", "validOutput");
         assertFalse(result, "Computation should fail with empty inputLocation");
     }
     
     @Test
     public void testExecuteComputation_NullOutputLocation() {
         CoordinationComponent component = createComponent();
-        boolean result = component.executeComputation("validInput", null);
+        boolean result = component.executeComputation("user123","validInput", null);
         assertFalse(result, "Computation should fail with null outputLocation");
     }
     
     @Test
     public void testExecuteComputation_EmptyOutputLocation() {
         CoordinationComponent component = createComponent();
-        boolean result = component.executeComputation("validInput", "");
+        boolean result = component.executeComputation("user123","validInput", "");
         assertFalse(result, "Computation should fail with empty outputLocation");
     }
     
@@ -69,6 +69,7 @@ public class CoordinationComponentTest {
     public void testExecuteBatchComputation_ValidParameters() {
         CoordinationComponent component = createComponent();
         boolean result = component.executeBatchComputation(
+        	List.of("user1","user2"),
             List.of("input1", "input2"), 
             List.of("output1", "output2")
         );
@@ -79,6 +80,7 @@ public class CoordinationComponentTest {
     public void testExecuteBatchComputation_MismatchedLists() {
         CoordinationComponent component = createComponent();
         boolean result = component.executeBatchComputation(
+        	List.of("user1","user2"),
             List.of("input1", "input2"), 
             List.of("output1")
         );
