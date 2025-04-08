@@ -50,7 +50,7 @@ public class CoordinationComponent {
             }
             
             // Write results
-            return writeToStorage(outputLocation, results);
+            return writeToStorage(outputLocation, results, userId);
         } catch (RuntimeException e) {
         	
             // Runtime Exceptions
