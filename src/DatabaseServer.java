@@ -1,12 +1,15 @@
 import java.util.ArrayList;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Scanner;
+import java.util.Collections;
+import java.util.List;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.stream.Stream;
 
 public class DatabaseServer implements DatabaseServerInterface {
 	
 	private LoginAttempt login;
-	private ArrayList<Double> userData = new ArrayList<>(); //This will eventually be some sort of database, but since I dont know anything about that, this'll have to do.
+	private List<Double> userData = Collections.synchronizedList(new ArrayList<>()); //This will eventually be some sort of database, but since I dont know anything about that, this'll have to do.
 
 	
 	public DatabaseServer(LoginRequest loginRequest) {
@@ -17,7 +20,7 @@ public class DatabaseServer implements DatabaseServerInterface {
 	@Override
 	public boolean storeUserData(String fileName) {
 		try (Stream<String> lines = Files.lines(Paths.get(fileName))) {
-            // Process each line concurrently using a parallel stream.
+            // Process each line at the same time using a parallel stream.
             lines.parallel().forEach(line -> {
                 String trimmedLine = line.trim();
                 if (trimmedLine.isEmpty()) {
@@ -29,7 +32,7 @@ public class DatabaseServer implements DatabaseServerInterface {
                     try {
                         double number = Double.parseDouble(element.trim());
                         // Simulate storing the number in a database.
-                        fictitiousDatabase.add(number);
+                        userData.add(number);
                     } catch (NumberFormatException e) {
                         System.out.println("Invalid number format for element: " + element +
                                            " in line: " + line);
