@@ -33,55 +33,35 @@ public class CoordinationComponentTest {
     @Test
     public void testExecuteComputation_ValidParameters() {
         CoordinationComponent component = createComponent();
-        CoordinationComponentThreading
         boolean result = component.executeComputation("user123", "validInput", "validOutput");
-
-        boolean result = component.executeComputation("validInput", "validOutput");
-        main
         assertTrue(result, "Computation should succeed with valid parameters");
     }
     
     @Test
     public void testExecuteComputation_NullInputLocation() {
         CoordinationComponent component = createComponent();
-        CoordinationComponentThreading
         boolean result = component.executeComputation("user123", null, "validOutput");
-
-        boolean result = component.executeComputation(null, "validOutput");
-        main
         assertFalse(result, "Computation should fail with null inputLocation");
     }
     
     @Test
     public void testExecuteComputation_EmptyInputLocation() {
         CoordinationComponent component = createComponent();
-        CoordinationComponentThreading
         boolean result = component.executeComputation("user123","", "validOutput");
-
-        boolean result = component.executeComputation("", "validOutput");
-        main
         assertFalse(result, "Computation should fail with empty inputLocation");
     }
     
     @Test
     public void testExecuteComputation_NullOutputLocation() {
         CoordinationComponent component = createComponent();
-        CoordinationComponentThreading
         boolean result = component.executeComputation("user123","validInput", null);
-
-        boolean result = component.executeComputation("validInput", null);
-        main
         assertFalse(result, "Computation should fail with null outputLocation");
     }
     
     @Test
     public void testExecuteComputation_EmptyOutputLocation() {
         CoordinationComponent component = createComponent();
-        CoordinationComponentThreading
         boolean result = component.executeComputation("user123","validInput", "");
-
-        boolean result = component.executeComputation("validInput", "");
-        main
         assertFalse(result, "Computation should fail with empty outputLocation");
     }
     
@@ -89,10 +69,7 @@ public class CoordinationComponentTest {
     public void testExecuteBatchComputation_ValidParameters() {
         CoordinationComponent component = createComponent();
         boolean result = component.executeBatchComputation(
-        CoordinationComponentThreading
         	List.of("user1","user2"),
-
-        main
             List.of("input1", "input2"), 
             List.of("output1", "output2")
         );
@@ -103,10 +80,7 @@ public class CoordinationComponentTest {
     public void testExecuteBatchComputation_MismatchedLists() {
         CoordinationComponent component = createComponent();
         boolean result = component.executeBatchComputation(
-        CoordinationComponentThreading
         	List.of("user1","user2"),
-
-        main
             List.of("input1", "input2"), 
             List.of("output1")
         );
